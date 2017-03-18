@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>progressive image</title>
+  <style>
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  main {
+    width: 70%;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  
+  h1{
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  .full {
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+  }
+  
+  .space {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .progressive {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+  
+  .progressive img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 0 none;
+  }
+  
+  .progressive img.preview {
+    filter: blur(2vw);
+    transform: scale(1.05);
+  }
+  .progressive img.hide {
+    opacity: 0;
+  }
+  
+  .progressive img.origin {
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: origin 1s ease-out;
+  }
+  
+  @keyframes origin {
+    0% {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  <h1>progressive image demo</h1>
+  <main>
+    <div class="progressive full">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/1.jpg?t=1" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r1.jpg" />
+    </div>
+
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/2.jpg" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r2.jpg" />
+    </div>
+
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/3.jpg" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r3.jpg" />
+    </div>
+
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/7.jpg" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r7.jpg" />
+    </div>
+
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/6.jpg" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r6.jpg" />
+    </div>
+
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview lazy" data-src="./coding.jpg" src="./r.jpg" />
+    </div>
+
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/5.jpg" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r5.jpg" />
+    </div>
+
+
+
+    <div class="space"></div>
+    <div class="progressive full">
+      <img class="preview lazy" data-src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/4.jpg" data-srcset="http://7xiblh.com1.z0.glb.clouddn.com/progressive/4.jpg 960w, http://7xiblh.com1.z0.glb.clouddn.com/progressive/4-m.jpg 1280w, http://7xiblh.com1.z0.glb.clouddn.com/progressive/4-l.jpg 1920w" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r4.jpg" />
+    </div>
+  </main>
+  <script>
+  const EVENTS = ['scroll', 'wheel', 'mousewheel', 'resize']
+
+  const Util = {
+    throttle(action, delay) {
+      let timeout = null
+      let lastRun = 0
+      return function() {
+        if (timeout) {
+          return
+        }
+        const elapsed = Date.now() - lastRun
+        const context = this
+        const args = arguments
+        const runCallback = function() {
+          lastRun = Date.now()
+          timeout = false
+          action.apply(context, args)
+        }
+        if (elapsed >= delay) {
+          runCallback()
+        } else {
+          timeout = setTimeout(runCallback, delay)
+        }
+      }
+    },
+    on(el, ev, fn) {
+      el.addEventListener(ev, fn)
+    },
+    off(el, ev, fn) {
+      el.removeEventListener(ev, fn)
+    },
+  }
+
+  const events = (el, bind) => {
+    if(bind){
+      EVENTS.forEach(evt => {
+        Util.on(el, evt, lazy)
+      })
+    }else {
+      EVENTS.forEach(evt => {
+        Util.off(el, evt, lazy)
+      })
+    }
+  }
+
+  const lazy = Util.throttle(()=>{
+    checkImage()
+  }, 300)
+
+  
+  events(window, true)
+  checkImage()
+
+
+  function checkImage() {
+    const lazys = document.querySelectorAll('img.lazy')
+    const l = lazys.length
+    if(l>0){
+      for (var i = 0; i < l; i++) {
+        var rect = lazys[i].getBoundingClientRect()
+        if (rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0) {
+          loadImage(lazys[i]);
+        }
+      }
+    }else {
+      events(window, false)
+    }
+
+  }
+
+  function loadImage(item) {
+    var img = new Image();
+    if (item.dataset) {
+      item.dataset.srcset && (img.srcset = item.dataset.srcset)
+      item.dataset.sizes && (img.sizes = item.dataset.sizes)
+    }
+    img.src = item.dataset.src;
+    img.className = 'origin';
+    img.onload = () => {
+      item.classList.remove('lazy')
+      mountImage(item, img)
+    }
+  }
+
+  function mountImage(preview, img) {
+    // add full image
+    var parent = preview.parentNode
+    parent.appendChild(img).addEventListener('animationend', function(e) {
+      preview.classList.remove('origin')
+        // remove preview image
+      var pre = parent.querySelector('img.preview');
+      if (pre) {
+        e.target.alt = pre.alt || '';
+        preview.classList.add('hide')
+        // parent.removeChild(pre);
+        // e.target.classList.remove('origin');
+      }
+
+    });
+
+  }
+  // }
+  </script>
+</body>
+
+</html>
