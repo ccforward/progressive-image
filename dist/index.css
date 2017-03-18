@@ -1,0 +1,65 @@
+.progressive {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.progressive img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border: 0 none;
+}
+.progressive img.preview {
+  filter: blur(2vw);
+  transform: scale(1.05);
+}
+.progressive img.hide {
+  opacity: 0;
+}
+.progressive img.origin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: origin 1s ease-out;
+}
+@-moz-keyframes origin {
+  0% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes origin {
+  0% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-o-keyframes origin {
+  0% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes origin {
+  0% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

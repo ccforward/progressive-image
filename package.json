@@ -1,14 +1,40 @@
 {
   "name": "progressive-image",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "a progressive-image module for Villain JavaScript and Vue 1.0+ & 2.0+",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.js"
   },
-  "author": "",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccforward/progressive-image"
+  },
+  "keywords": [
+    "progressive",
+    "progressive-image",
+    "vue-progressive-image",
+    "vue-progressive",
+    "lazy-image",
+    "lazy",
+    "vue lazy"
+  ],
   "devDependencies": {
-    "gm": "^1.23.0"
-  }
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "gm": "^1.23.0",
+    "style-loader": "^0.15.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue": "^2.2.4",
+    "webpack": "^2.2.1"
+  },
+  "author": "ccforward <ccking@foxmail.com>",
+  "license": "MIT"
 }

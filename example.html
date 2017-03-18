@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -170,58 +169,58 @@
     }
   }
 
+  let windowHasBindEvents = false
+
   const lazy = Util.throttle(()=>{
     checkImage()
   }, 300)
 
-  
-  events(window, true)
   checkImage()
 
 
   function checkImage() {
+    if(!windowHasBindEvents){
+      windowHasBindEvents = true
+      events(window, true)
+    }
+
     const lazys = document.querySelectorAll('img.lazy')
     const l = lazys.length
     if(l>0){
-      for (var i = 0; i < l; i++) {
-        var rect = lazys[i].getBoundingClientRect()
+      for (let i = 0; i < l; i++) {
+        const rect = lazys[i].getBoundingClientRect()
         if (rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0) {
           loadImage(lazys[i]);
         }
       }
     }else {
+      windowHasBindEvents = false
       events(window, false)
     }
-
   }
 
   function loadImage(item) {
-    var img = new Image();
+    const img = new Image()
     if (item.dataset) {
       item.dataset.srcset && (img.srcset = item.dataset.srcset)
       item.dataset.sizes && (img.sizes = item.dataset.sizes)
     }
     img.src = item.dataset.src;
     img.className = 'origin';
-    img.onload = () => {
+    img.onload = _ => {
       item.classList.remove('lazy')
       mountImage(item, img)
     }
   }
 
   function mountImage(preview, img) {
-    // add full image
-    var parent = preview.parentNode
+    const parent = preview.parentNode
     parent.appendChild(img).addEventListener('animationend', function(e) {
       preview.classList.remove('origin')
-        // remove preview image
-      var pre = parent.querySelector('img.preview');
-      if (pre) {
-        e.target.alt = pre.alt || '';
-        preview.classList.add('hide')
-        // parent.removeChild(pre);
-        // e.target.classList.remove('origin');
-      }
+      e.target.alt = preview.alt || '';
+      preview.classList.add('hide')
+      // parent.removeChild(preview);
+      // e.target.classList.remove('origin');
 
     });
 
