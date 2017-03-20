@@ -1,10 +1,11 @@
 {
   "name": "progressive-image",
-  "version": "0.1.0",
-  "description": "a progressive-image module for Villain JavaScript and Vue 1.0+ & 2.0+",
+  "version": "1.0.0",
+  "description": "A progressive-image module for Villain JavaScript and Vue 1.0+ & 2.0+",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.js"
+    "build": "webpack --config webpack.js",
+    "demo": "webpack --config webpack.demo.conf.js"
   },
   "repository": {
     "type": "git",

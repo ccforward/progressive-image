@@ -5,7 +5,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     index: './src/index.js',
-    vue: './src/vue-index.js'
+    vue: './src/index-vue.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>progressive image</title>
+  <style>
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  
+  main {
+    width: 70%;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  
+  h1{
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  .full {
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+  }
+  
+  .space {
+    width: 100%;
+    height: 200px;
+  }
+  </style>
+  <link rel="stylesheet" href="../dist/index.css">
+</head>
+
+<body>
+  <h1>progressive image demo</h1>
+  <main id="app">
+    <div class="progressive full">
+      <img class="preview lazy" v-progressive="big1" src="http://7xiblh.com1.z0.glb.clouddn.com/progressive/r1.jpg" />
+    </div>
+
+    <template v-for="item in imgs">
+      <div class="space"></div>
+      <div class="progressive">
+        <img class="preview" v-progressive="item.src" :data-srcset="item.srcset" :src="item.preview" />
+      </div>
+    </template>
+
+    <div class="space"></div>
+    <div class="progressive full">
+      <img class="preview lazy" v-progressive="big2" data-srcset="../assets/4.jpg 960w, ../assets/4-m.jpg 1280w, ../assets/4-l.jpg 1920w" src="../assets/r4.jpg" />
+    </div>
+  </main>
+  <script src="./demo.dist.js"></script>
+</body>
+
+</html>

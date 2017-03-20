@@ -1,30 +1,35 @@
 # progressive-image
 
-[![NPM version][npm-image]][npm-url]
+A progressive-image module for Villain JavaScript and Vue 1.0+ & 2.0+
+
+![](https://github.com/ccforward/cc/raw/master/Blog/pic/progressive-0.gif)
 
 ## GitHub
 
-[https://github.com/ccforward/progressive-image](https://github.com/ccforward/progressive-image)
+[GitHub - progressive-image](https://github.com/ccforward/progressive-image)
 
 ## NPM
 
-[https://www.npmjs.com/package/progressive-image](https://www.npmjs.com/package/progressive-image)
+[![NPM version][npm-image]][npm-url]
+
+[NPM - progressive-image](https://www.npmjs.com/package/progressive-image)
 
 ## Usage
 
-```
+```shell
 $ npm install progressive-image --save
  
 $ yarn add progressive-image
-
 ```
 
 
-## Villain JS
+## For Villain JS
 
 ### demo
 
 [progressive-image-demo](https://ccforward.github.io/progressive-image/index.html)
+
+[progressive-image-vue-demo](https://ccforward.github.io/progressive-image/example/demo-vue.html)
 
 ### Usage
 
@@ -66,14 +71,73 @@ or
 
 ```
 
+## For Vue.js
+
+#### import css
+```html
+<link href="./node_modules/progressive-image/dist/index.css" rel="stylesheet" type="text/css">
+```
+
+or
+
+```html
+<link href="//unpkg.com/progressive-image/dist/index.css" rel="stylesheet" type="text/css">
+```
+
+#### HTML
+
+```html
+<main id="app">
+  <template v-for="item in imgs">
+    <div class="space"></div>
+    <div class="progressive">
+      <img class="preview" v-progressive="item.src" :data-srcset="item.srcset" :src="item.preview" />
+    </div>
+  </template>
+</main>
+```
+
+#### JS
+
+```js
+import Vue from 'vue'
+import progressive from 'progressive-image/dist/vue'
+
+Vue.use(progressive, {
+  removePreview: true
+})
+
+new Vue({
+  name: 'demo',
+  el: '#app',
+  data: {
+    imgs: [
+      {
+        src: 'http://7xiblh.com1.z0.glb.clouddn.com/progressive/2.jpg',
+        preview: 'http://7xiblh.com1.z0.glb.clouddn.com/progressive/r2.jpg'
+      },
+      {
+        src: 'http://7xiblh.com1.z0.glb.clouddn.com/progressive/3.jpg',
+        preview: 'http://7xiblh.com1.z0.glb.clouddn.com/progressive/r3.jpg'
+      }
+    ]
+  }
+})
+```
 
 
 ## build
 
-```js
+#### build dist
 
+```shell
 npm run build
+```
 
+#### build demo
+
+```shell
+npm run demo
 ```
 
 [npm-url]: https://www.npmjs.com/package/progressive-image
