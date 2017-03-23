@@ -1,6 +1,6 @@
 # progressive-image
 
-A dead simple progressive-image module for Villain JavaScript and Vue.js 1.0+ & 2.0+
+A dead simple progressive-image module for Vanilla JavaScript and Vue.js 1.0+ & 2.0+
 
 ![gif](https://github.com/ccforward/cc/raw/master/Blog/pic/progressive-0.gif)
 
@@ -22,7 +22,7 @@ $ npm install progressive-image --save
 $ yarn add progressive-image
 ```
 
-## For Villain JS
+## For Vanilla JS
 
 ### demo
 
