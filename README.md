@@ -14,6 +14,11 @@ A dead simple progressive-image module for Vanilla JavaScript and Vue.js 1.0+ & 
 
 [NPM - progressive-image](https://www.npmjs.com/package/progressive-image)
 
+## update
+
+#### @v1.1.0
+add the `scale` option for origin image animation
+
 ## Install
 
 ```shell
@@ -65,6 +70,7 @@ or
     el: '#app',
     lazyClass: 'lazy',
     removePreview: true
+    scale: true
   }).fire()
 })()
 
@@ -103,7 +109,8 @@ import Vue from 'vue'
 import progressive from 'progressive-image/dist/vue'
 
 Vue.use(progressive, {
-  removePreview: true
+  removePreview: true,
+  scale: true
 })
 
 new Vue({
