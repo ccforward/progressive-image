@@ -5,6 +5,7 @@ class Progressive {
     this.el = option.el
     this.lazyClass = option.lazyClass || 'lazy'
     this.removePreview = option.removePreview || false
+    this.scale = option.scale || false
 
     this.EVENTS = ['scroll', 'wheel', 'mousewheel', 'resize']
     this.Util = {
@@ -88,6 +89,9 @@ class Progressive {
     }
     img.src = item.dataset.src
     img.className = 'origin'
+    if(this.scale) {
+      img.className = 'origin-scale'
+    }
     item.classList.remove('lazy')
     img.onload = _ => {
       this.mountImage(item, img)
@@ -120,6 +124,7 @@ class Progressive {
       if(this.removePreview){
         parent.removeChild(preview)
         e.target.classList.remove('origin')
+        e.target.classList.remove('origin-scale')
       }
     })
   }

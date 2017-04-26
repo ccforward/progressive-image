@@ -2,7 +2,8 @@ import Vue from 'vue'
 import progressive from'../src/index-vue'
 
 Vue.use(progressive, {
-  removePreview: true
+  removePreview: true,
+  scale: false
 })
 
 new Vue({

@@ -21,45 +21,83 @@
   position: absolute;
   left: 0;
   top: 0;
-  animation: origin 1s ease-out;
+  animation: origin 1.5s ease-out;
+}
+.progressive img.origin-scale {
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: origin-scale 1s ease-out;
 }
 @-moz-keyframes origin {
   0% {
-    transform: scale(1.1);
     opacity: 0;
   }
   100% {
-    transform: scale(1);
     opacity: 1;
   }
 }
 @-webkit-keyframes origin {
   0% {
-    transform: scale(1.1);
     opacity: 0;
   }
   100% {
-    transform: scale(1);
     opacity: 1;
   }
 }
 @-o-keyframes origin {
   0% {
-    transform: scale(1.1);
     opacity: 0;
   }
   100% {
-    transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes origin {
   0% {
-    transform: scale(1.1);
     opacity: 0;
   }
   100% {
-    transform: scale(1);
     opacity: 1;
+  }
+}
+@-moz-keyframes origin-scale {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes origin-scale {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-o-keyframes origin-scale {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes origin-scale {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

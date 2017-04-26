@@ -68,7 +68,8 @@ export default (Vue, Opt = {}) => {
   const imgCache = []
 
   const Options = {
-    removePreview: Opt.removePreview || 'false',
+    removePreview: Opt.removePreview || false,
+    scale: Opt.scale || false,
     hasBind: false
   }
 
@@ -137,6 +138,9 @@ export default (Vue, Opt = {}) => {
     
     img.src = item.src
     img.className = 'origin'
+    if(Options.scale) {
+      img.className = 'origin-scale'
+    }
     img.onload = _ => {
       Listeners.remove(item)
       imgCache.push(item.src)
@@ -156,6 +160,7 @@ export default (Vue, Opt = {}) => {
       if(Options.removePreview){
         parent.removeChild(preview)
         e.target.classList.remove('origin')
+        e.target.classList.remove('origin-scale')
       }
     })
   }

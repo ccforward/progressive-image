@@ -143,7 +143,8 @@
   var imgCache = [];
 
   var Options = {
-    removePreview: Opt.removePreview || 'false',
+    removePreview: Opt.removePreview || false,
+    scale: Opt.scale || false,
     hasBind: false
   };
 
@@ -210,6 +211,9 @@
 
     img.src = item.src;
     img.className = 'origin';
+    if (Options.scale) {
+      img.className = 'origin-scale';
+    }
     img.onload = function (_) {
       Listeners.remove(item);
       imgCache.push(item.src);
@@ -227,6 +231,7 @@
       if (Options.removePreview) {
         parent.removeChild(preview);
         e.target.classList.remove('origin');
+        e.target.classList.remove('origin-scale');
       }
     });
   };
@@ -9554,7 +9559,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1__src_index_vue__["a" /* default */], {
-  removePreview: true
+  removePreview: true,
+  scale: false
 });
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
