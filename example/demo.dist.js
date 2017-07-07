@@ -241,7 +241,10 @@
   var _unbind = function _unbind(el, binding, vnode, oldValue) {
     if (!el) return;
     if (Options.hasBind) {
+      Options.hasBind = false;
       events(window, false);
+      Listeners.length = 0;
+      imgCache.length = 0;
     }
   };
 
