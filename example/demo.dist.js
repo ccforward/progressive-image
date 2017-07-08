@@ -149,12 +149,14 @@
   };
 
   var lazy = Util.throttle(function (_) {
+    console.log('scroll', Listeners.length);
     for (var i = 0, l = Listeners.length; i < l; i++) {
       checkImage(Listeners[i]);
     }
   }, 300);
 
   var checkImage = function checkImage(listener) {
+    console.log(listener, imgCache);
     if (imgCache.indexOf(listener.src) > -1) {
       return render(listener.el, listener.src, 'loaded');
     } else {
@@ -239,7 +241,10 @@
   var _unbind = function _unbind(el, binding, vnode, oldValue) {
     if (!el) return;
     if (Options.hasBind) {
+      Options.hasBind = false;
       events(window, false);
+      Listeners.length = 0;
+      imgCache.length = 0;
     }
   };
 
