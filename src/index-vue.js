@@ -172,8 +172,7 @@ export default (Vue, Opt = {}) => {
     if (Options.hasBind) {
       Options.hasBind = false
       events(window, false)
-      Listeners.length = 0
-      imgCache.length = 0
+      Listeners.length = imgCache.length = 0
     }
   }
 
