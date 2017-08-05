@@ -74,14 +74,12 @@ export default (Vue, Opt = {}) => {
   }
 
   const lazy = Util.throttle( _ => {
-    console.log('scroll', Listeners.length)
     for(let i=0,l=Listeners.length;i<l;i++){
       checkImage(Listeners[i])
     }
   }, 300)
 
   const checkImage = listener => {
-    console.log(listener, imgCache)
     if(imgCache.indexOf(listener.src) > -1){
       return render(listener.el, listener.src, 'loaded')
     }else {
@@ -127,7 +125,7 @@ export default (Vue, Opt = {}) => {
 
   }
 
-  
+
   const render = (el, src, status) => {
     el.setAttribute('lazy', status);
   }
@@ -137,7 +135,7 @@ export default (Vue, Opt = {}) => {
       item.el.dataset.srcset && (img.srcset = item.el.dataset.srcset)
       item.el.dataset.sizes && (img.sizes = item.el.dataset.sizes)
     }
-    
+
     img.src = item.src
     img.className = 'origin'
     if(Options.scale) {
@@ -149,7 +147,7 @@ export default (Vue, Opt = {}) => {
       mountImage(item, img)
     }
     img.onerror = _ => {
-      
+
     }
   }
 
