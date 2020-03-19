@@ -7,7 +7,7 @@ class Progressive {
     this.removePreview = option.removePreview || false
     this.scale = option.scale || false
 
-    this.EVENTS = ['scroll', 'wheel', 'mousewheel', 'resize']
+    this.EVENTS = ['scroll', 'wheel', 'mousewheel', 'resize', 'touchmove']
     this.Util = {
       throttle(action, delay) {
         let timeout = null

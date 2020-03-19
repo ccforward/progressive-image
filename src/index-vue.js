@@ -5,7 +5,7 @@ export default (Vue, Opt = {}) => {
     if(idx > -1) return this.splice(idx,1)
   }
   const isVue2 = Vue.version.split('.')[0] == '2'
-  const EVENTS = ['scroll', 'wheel', 'mousewheel', 'resize']
+  const EVENTS = ['scroll', 'wheel', 'mousewheel', 'resize', 'touchmove']
   const Util = {
     getAnimationEvent() {
       const el = document.createElement('fake')
